@@ -1,4 +1,4 @@
-public class World 
+public class World //this class is used only to get position of an object in this world
 {
     private int x;
     private int y;
