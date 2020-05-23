@@ -4,7 +4,7 @@ public class Ground extends World
 	int height;
 	boolean pit;
 	Color col;
-    public Ground(int hieght, boolean pit, Color col)
+    public Ground(int height, boolean pit, Color col)
     {
 
     }
