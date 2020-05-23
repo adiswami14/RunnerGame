@@ -4,9 +4,11 @@ public class Ground extends World
 	int height;
 	boolean pit;
 	Color col;
-    public Ground(int hieght, boolean pit, Color col)
+    public Ground(int height, boolean pit, Color col)
     {
-
+		this.height = height;
+		this.pit = pit;
+		this.col = col;
     }
     public int getHeight()
     {
