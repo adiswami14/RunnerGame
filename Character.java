@@ -1,4 +1,5 @@
 import java.awt.event.*;
+import java.io.Console;
 public class Character extends World implements KeyListener
 {
 
@@ -36,6 +37,7 @@ public class Character extends World implements KeyListener
         // TODO Auto-generated method stub
         if(e.getKeyCode() == 32) //spacebar
         {
+            System.out.println("JUMP");
             jump();
         }
     }
