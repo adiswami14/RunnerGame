@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.util.*;
 import java.awt.event.*;
-public class Ground extends World implements KeyListener
+public class Ground extends World
 {
 	//add key listener later
 	private int height;
@@ -37,23 +37,5 @@ public class Ground extends World implements KeyListener
 	}
 	public void setPit(int a){
 		pitPosition.set(a, true);
-	}
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getKeyCode() == 32) //spacebar
-		{
-		}
-		if(e.getKeyCode() == 39)
-		{
-
-		}
-	}
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-	}
-
-
+	}	
 }
