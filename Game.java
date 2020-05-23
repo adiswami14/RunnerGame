@@ -15,11 +15,11 @@ public class Game extends JPanel
     {
 		super.paintComponent(g);
 		g.setColor(Color.BLACK);
-		g.fillRect(0,0, frame.getWidth(), frame.getHeight());
+
+		g.fillRect(0,0, frame.getWidth(), frame.getHeight());	//Created Rectangle for the ground
 		Ground ground = new Ground(200, false, Color.GREEN);
 		g.setColor(ground.getColor());
 		g.fillRect(0, frameHeight-ground.getHeight(), frameWidth, frameHeight);
-
 
 	}
     public void instantiateFrame()
