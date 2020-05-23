@@ -46,6 +46,10 @@ public class Ground extends World implements KeyListener
 		if(e.getKeyCode() == 32) //spacebar
 		{
 		}
+		if(e.getKeyCode() == 39)
+		{
+
+		}
 	}
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
