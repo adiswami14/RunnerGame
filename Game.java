@@ -18,20 +18,19 @@ public class Game extends JPanel
 		super.paintComponent(g);
 		g.setColor(Color.BLACK);
 		g.fillRect(0,0, frame.getWidth(), frame.getHeight());	//Created Rectangle for the ground
-		Ground ground = new Ground(200, false, Color.GREEN);
+		Ground ground = new Ground(0, 0, 200, false, Color.GREEN);
 		g.setColor(ground.getColor());
         g.fillRect(0, frameHeight-ground.getHeight(), frameWidth, frameHeight); //so this goes from bottom to top instead of top to bottom
-        playerY = frameHeight - ground.getHeight();
-        /*player.setY(playerY);
+        player.setY(frameHeight - ground.getHeight());
         g.setColor(Color.RED);
-        g.fillRect(player.getX(), player.getY()-40, 40, 40);*/
+        g.fillRect(player.getX(), player.getY()-40, 40, 40);
 
 	}
     public void instantiateFrame()
     {
         frame = new JFrame();
         world = new World(0,0);
-        player = new Character(playerX, playerY);
+        player = new Character(30, 0);
         frame.add(this);
         frame.setSize(frameWidth, frameHeight);
         frame.setVisible(true);
