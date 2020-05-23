@@ -7,6 +7,7 @@ public class Game extends JPanel
     public Game()
     {
         instantiateFrame();
+        //hey zubair
     }
     public void instantiateFrame()
     {
