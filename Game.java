@@ -7,7 +7,7 @@ public class Game extends JPanel
     public Game()
     {
         instantiateFrame();
-        //hey zubair
+        //hey adi
     }
     public void instantiateFrame()
     {
@@ -20,6 +20,6 @@ public class Game extends JPanel
     }
     public static void main(String[] args)
     {
-       Game app = new Game(); 
+       Game app = new Game();
     }
 }
