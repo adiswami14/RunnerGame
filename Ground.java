@@ -9,13 +9,14 @@ public class Ground extends World implements KeyListener
 	private Color col;
 	private int groundColumns;
 	private ArrayList<Boolean> pitPosition;
-    public Ground(int height, boolean pit, Color col)
+    public Ground(int x, int y, int height, boolean pit, Color col)
     {
+		super(x, y);
 		this.height = height;
 		this.pit = pit;
 		this.col = col;
 		pitPosition = new ArrayList<Boolean>();
-		for(int x=0; x<groundColumns; x++)
+		for(int z=0; z<groundColumns; z++)
 			pitPosition.add(false);
     }
     public int getHeight()
