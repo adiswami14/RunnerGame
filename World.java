@@ -2,8 +2,10 @@ public class World //this class is used only to get position of an object in thi
 {
     private int x;
     private int y;
-    public World()
+    public World(int x, int y)
     {
+        this.x = x;
+        this.y = y;
     }
     public int getX()
     {

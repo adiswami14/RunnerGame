@@ -1,16 +1,12 @@
 import java.awt.event.*;
 public class Character extends World implements KeyListener
 {
-    private int x;
-    private int y;
+
     private int speed = 2; //rate of ground movement beneath character
     private int jumpHeight = 30; //height that character jumps when jump method is called
-    private Character character;
     public Character(int x, int y)
     {
-        this.x = x;
-        this.y = y;
-        character = new Character(x, y);
+        super(x, y);
     }
     public int getJumpHeight()
     {
@@ -28,7 +24,7 @@ public class Character extends World implements KeyListener
     }
     public void jump()
     {
-        
+        setY(getY()+jumpHeight);
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -40,7 +36,7 @@ public class Character extends World implements KeyListener
         // TODO Auto-generated method stub
         if(e.getKeyCode() == 32) //spacebar
         {
-            character.jump();
+            jump();
         }
     }
 
