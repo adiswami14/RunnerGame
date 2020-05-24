@@ -20,19 +20,28 @@ public class Game extends JPanel implements KeyListener {
         super.paintComponent(g);
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, frame.getWidth(), frame.getHeight()); // Created Rectangle for frame
-        g.setColor(ground.getColor());
-        int count = 0;
-        for (int x = 0; x < frame.getWidth(); x++) {
-            if (x % 100 == 0) { // evenly divides width into 10 rectangles
-                System.out.println("COUNT: " + count);
-                if (ground.getPitPosition().get(count) == false) {
 
-                    g.fillRect(x, frameHeight - ground.getHeight(), frameWidth, ground.getHeight());
-                }
-                count++;
-            }
-        }
+      	g.setColor(ground.getColor());
+	   		int count =0;
+	   		for(int x=0; x<frame.getWidth(); x++){
+	   			if(x%100 == 0){ //evenly divides width into 10 rectangles
+	   				if(ground.getPitPosition().get(count) == false){
+	   					g.fillRect(x, frameHeight-ground.getHeight(), frameWidth/10, ground.getHeight());
 
+	   					if(count%2==0){
+	   						ground.setColor(Color.YELLOW);
+	   						g.setColor(ground.getColor());
+	   					}
+	   					else{
+	   						ground.setColor(Color.GREEN);
+	   						g.setColor(ground.getColor());
+	   					}
+	   				}
+	   				count++;
+	   			}
+	   		}
+
+       // g.fillRect(0, frameHeight-ground.getHeight(), frameWidth, ground.getHeight()); //so this goes from bottom to top instead of top to bottom
         // g.fillRect(0, frameHeight-ground.getHeight(), frameWidth,
         // ground.getHeight()); //so this goes from bottom to top instead of top to
         // bottom
@@ -105,7 +114,7 @@ public class Game extends JPanel implements KeyListener {
                 e.printStackTrace();
                 System.exit(0);
             }
-        }  
+        }
     }
     public static void main(String[] args)
     {
