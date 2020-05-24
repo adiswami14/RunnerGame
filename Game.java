@@ -11,6 +11,8 @@ public class Game extends JPanel implements KeyListener {
     int playerX = 30, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
+    int pitInterval = 5; //will change everytime a pitFall shows up
+    int countRight =0; //number of times the right arrow has been clicked
 	boolean first = false;
     public Game() {
         instantiateFrame();
@@ -25,29 +27,23 @@ public class Game extends JPanel implements KeyListener {
 		int count =0;
 		for(int x=0; x<frame.getWidth(); x++){
 			if(x%100 == 0){ //evenly divides width into 10 rectangles
-				System.out.println(count);
 				if(ground.getPitPosition().get(count) == false){
-					g.fillRect(x, frameHeight-ground.getHeight(), frameWidth/10, ground.getHeight());
+					g.fillRect(x, frameHeight-ground.getHeight(), frameWidth/10, ground.getHeight()); //so this goes from bottom to top instead of top to bottom
 
-
-					if(count%2==0){							//just to see the rectangles
+					/*
+					if(count%2==0){							//alternates color to see each rectangle
 						ground.setColor(Color.YELLOW);
 						g.setColor(ground.getColor());
 					}
 					else{
 						ground.setColor(Color.GREEN);
 						g.setColor(ground.getColor());
-					}
+					}*/
 
 				}
 				count++;
 			}
 		}
-
-       // g.fillRect(0, frameHeight-ground.getHeight(), frameWidth, ground.getHeight()); //so this goes from bottom to top instead of top to bottom
-        // g.fillRect(0, frameHeight-ground.getHeight(), frameWidth,
-        // ground.getHeight()); //so this goes from bottom to top instead of top to
-        // bottom
 
         g.setColor(Color.RED);
         g.setFont(new Font("Times New Roman", Font.BOLD, 40));
@@ -91,9 +87,10 @@ public class Game extends JPanel implements KeyListener {
         }
         if (e.getKeyCode() == 39) // right
         {
-			if(!first){
+			countRight++;
+			if(countRight%pitInterval == 0 && !ground.getPitPosition().get(ground.getPitPositionSize() - 2)){
 				ground.setPitPosition(ground.getPitPositionSize() - 1, true);
-				first=true;
+				pitInterval = (int)(Math.random()*15) + 3;
 			}
 			for(int x=0; x<ground.getPitPositionSize(); x++){
 				if(ground.getPitPosition().get(x)==true){
@@ -105,11 +102,7 @@ public class Game extends JPanel implements KeyListener {
 						ground.setPitPosition(x, false);
 					}
 				}
-
 			}
-            //ground.setPitPosition(ground.getPitPositionSize() - 1, true);
-            System.out.println("IN RIGHT");
-            System.out.println(ground.getPitPosition());
             repaint();
         }
     }
