@@ -7,7 +7,7 @@ public class Ground extends World
 	private int height;
 	private boolean pit;
 	private Color col;
-	private int groundColumns = 11;
+	private int groundColumns = 10;
 	private ArrayList<Boolean> pitPosition;
     public Ground(int x, int y, int height, boolean pit, Color col)
     {
