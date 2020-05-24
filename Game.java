@@ -7,10 +7,10 @@ public class Game extends JPanel implements KeyListener
     JFrame frame;
     World world;
     Character player;
+    Ground ground = new Ground(0, 0, 200, false, Color.GREEN);;
     int playerX = 30, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
-    Ground ground = new Ground(0, 0, 200, false, Color.GREEN);
     public Game()
     {
         instantiateFrame();
@@ -19,14 +19,29 @@ public class Game extends JPanel implements KeyListener
     {
 		super.paintComponent(g);
 		g.setColor(Color.BLACK);
-		g.fillRect(0,0, frame.getWidth(), frame.getHeight());	//Created Rectangle for the ground
+		g.fillRect(0,0, frame.getWidth(), frame.getHeight());	//Created Rectangle for frame
+
 		g.setColor(ground.getColor());
-        g.fillRect(0, frameHeight-ground.getHeight(), frameWidth, frameHeight); //so this goes from bottom to top instead of top to bottom
+		int count =0;
+		for(int x=0; x<frame.getWidth(); x++){
+			if(x%100 == 0){ //evenly divides width into 10 rectangles
+				System.out.println("COUNT: "+count);
+				if(ground.getPitPosition().get(count) == false){
+
+					g.fillRect(x, frameHeight-ground.getHeight(), frameWidth, ground.getHeight());
+				}
+				count++;
+			}
+		}
+
+       // g.fillRect(0, frameHeight-ground.getHeight(), frameWidth, ground.getHeight()); //so this goes from bottom to top instead of top to bottom
+
         g.setColor(Color.RED);
         g.setFont(new Font("Times New Roman", Font.BOLD,40));
         g.drawString("Player X: "+player.getX(), 500, 200);
         g.drawString("Player Y: "+player.getY(), 500, 250);
         g.fillRect(player.getX(), player.getY()-40, 40, 40);
+
 
 	}
     public void instantiateFrame()
@@ -56,9 +71,12 @@ public class Game extends JPanel implements KeyListener
             System.out.println("jump");
             repaint();
         }
-		if(e.getKeyCode() == 39)
+		if(e.getKeyCode() == 39) //right
 		{
-
+			ground.setPitPosition(ground.getPitPositionSize()-1, true);
+			System.out.println("IN RIGHT");
+			System.out.println(ground.getPitPosition());
+			repaint();
 		}
     }
 

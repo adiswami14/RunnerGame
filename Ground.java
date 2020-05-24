@@ -7,7 +7,7 @@ public class Ground extends World
 	private int height;
 	private boolean pit;
 	private Color col;
-	private int groundColumns;
+	private int groundColumns = 11;
 	private ArrayList<Boolean> pitPosition;
     public Ground(int x, int y, int height, boolean pit, Color col)
     {
@@ -29,13 +29,20 @@ public class Ground extends World
 	public Color getColor(){
 		return col;
 	}
+	public ArrayList<Boolean> getPitPosition(){
+		return pitPosition;
+	}
+	public int getPitPositionSize(){
+		return pitPosition.size();
+	}
 	public void setHeight(int height){
 		this.height = height;
 	}
 	public void setColor(Color col){
 		this.col = col;
 	}
-	public void setPit(int a){
-		pitPosition.set(a, true);
-	}	
+	public void setPitPosition(int a, boolean bool){
+		pitPosition.set(a, bool);
+	}
+
 }
