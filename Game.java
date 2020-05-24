@@ -56,10 +56,10 @@ public class Game extends JPanel implements KeyListener {
         g.fillRect(player.getX(), player.getY() - 40, 40, 40);
         if(player.isJumping)
         {
-            player.setY(player.getY()-1);
+            player.setY(player.getY()-player.getJumpHeight());
         }
         else if(!player.isJumping && player.getY()<frameHeight - ground.getHeight())
-            player.setY(player.getY()+1);
+            player.setY(player.getY()+player.getJumpHeight());
         repaint();
     }
 
