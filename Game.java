@@ -44,7 +44,6 @@ public class Game extends JPanel implements KeyListener {
 				count++;
 			}
 		}
-		System.out.println("HELLO4");
         g.setColor(Color.RED);
         g.setFont(new Font("Times New Roman", Font.BOLD, 40));
         g.drawString("Player X: " + player.getX(), 500, 200);
@@ -58,7 +57,6 @@ public class Game extends JPanel implements KeyListener {
             player.setY(player.getY()+player.getJumpHeight());
 
         repaint();
-        System.out.println("HELLO3");
     }
 
     public void instantiateFrame() {
@@ -71,7 +69,6 @@ public class Game extends JPanel implements KeyListener {
         frame.setVisible(true);
         this.requestFocusInWindow();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        System.out.println("HELLO2");
     }
 
     @Override
