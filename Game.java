@@ -45,18 +45,7 @@ public class Game extends JPanel implements KeyListener {
 				count++;
 			}
 		}
-        g.setColor(Color.RED);
-        g.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        g.drawString("Player X: " + player.getX(), 500, 200);
-        g.drawString("Player Y: " + player.getY(), 500, 250);
-        g.fillRect(player.getX(), player.getY() - 40, 40, 40);
-        if(player.isJumping)
-        {
-            player.setY(player.getY()-player.getJumpHeight());
-        }
-        else if(!player.isJumping && player.getY()<frameHeight - ground.getHeight())
-            player.setY(player.getY()+player.getJumpHeight());
-
+        player.draw(g, ground);
         repaint();
     }
 
