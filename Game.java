@@ -20,6 +20,7 @@ public class Game extends JPanel implements KeyListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        System.out.println(this.isFocusOwner());
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, frame.getWidth(), frame.getHeight()); // Created Rectangle for frame
 
@@ -80,7 +81,6 @@ public class Game extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
-        System.out.println(this.isFocusOwner());
         if (e.getKeyCode() == 32) // spacebar
         {
             player.jump();
