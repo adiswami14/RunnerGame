@@ -8,7 +8,7 @@ public class Game extends JPanel implements KeyListener {
     World world;
     Character player;
     Ground ground = new Ground(0, 0, 200, false, Color.GREEN);;
-    int playerX = 30, playerY = 0;
+    int playerX = 500, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
     int pitInterval = 5; //will change everytime a pitFall shows up
@@ -56,13 +56,14 @@ public class Game extends JPanel implements KeyListener {
         }
         else if(!player.isJumping && player.getY()<frameHeight - ground.getHeight())
             player.setY(player.getY()+player.getJumpHeight());
+
         repaint();
     }
 
     public void instantiateFrame() {
         frame = new JFrame();
         world = new World(0, 0);
-        player = new Character(30, frameHeight - ground.getHeight());
+        player = new Character(playerX, frameHeight - ground.getHeight());
         this.addKeyListener(this);
         frame.add(this);
         frame.setSize(frameWidth, frameHeight);
