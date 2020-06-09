@@ -8,7 +8,7 @@ public class Game extends JPanel implements KeyListener {
     World world;
     Character player;
     Ground ground = new Ground(0, 0, 200, false, Color.GREEN);;
-    int playerX = 500, playerY = 0;
+    int playerX = 30, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
     int pitInterval = 5; //will change everytime a pitFall shows up
@@ -44,7 +44,7 @@ public class Game extends JPanel implements KeyListener {
 				count++;
 			}
 		}
-
+		System.out.println("HELLO4");
         g.setColor(Color.RED);
         g.setFont(new Font("Times New Roman", Font.BOLD, 40));
         g.drawString("Player X: " + player.getX(), 500, 200);
@@ -58,18 +58,20 @@ public class Game extends JPanel implements KeyListener {
             player.setY(player.getY()+player.getJumpHeight());
 
         repaint();
+        System.out.println("HELLO3");
     }
 
     public void instantiateFrame() {
         frame = new JFrame();
         world = new World(0, 0);
-        player = new Character(playerX, frameHeight - ground.getHeight());
+        player = new Character(30, frameHeight - ground.getHeight());
         this.addKeyListener(this);
         frame.add(this);
         frame.setSize(frameWidth, frameHeight);
         frame.setVisible(true);
         this.requestFocusInWindow();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        System.out.println("HELLO2");
     }
 
     @Override
@@ -81,6 +83,7 @@ public class Game extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
+        System.out.println("HELLO");
         if (e.getKeyCode() == 32) // spacebar
         {
             player.jump();
