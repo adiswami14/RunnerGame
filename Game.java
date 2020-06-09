@@ -80,7 +80,7 @@ public class Game extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
-        System.out.println("HELLO");
+        System.out.println(this.isFocusOwner());
         if (e.getKeyCode() == 32) // spacebar
         {
             player.jump();
