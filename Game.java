@@ -20,6 +20,7 @@ public class Game extends JPanel implements KeyListener {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        requestFocus(true);
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, frame.getWidth(), frame.getHeight()); // Created Rectangle for frame
 
