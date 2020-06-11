@@ -27,12 +27,16 @@ public class Character extends World {
     public void jump() {
         isJumping = true;        
     }
+    public boolean isInRange(int source, int target, int range)
+    {
+        return (source >= target-range && source <=target+range);
+    }
     public void draw(Graphics g, Ground ground)
     {
         g.setColor(Color.RED);
         g.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        g.drawString("Player X: " + getX(), 500, 200);
-        g.drawString("Player Y: " + getY(), 500, 250);
+        //g.drawString("Player X: " + getX(), 500, 200);
+        //g.drawString("Player Y: " + getY(), 500, 250);
         g.fillRect(getX(), getY() - 40, 40, 40);
         if(isJumping)
         {

@@ -2,6 +2,8 @@ public class World //this class is used only to get position of an object in thi
 {
     private int x;
     private int y;
+    protected boolean gameOver = false;
+    public int gameScore=0;
     public World(int x, int y)
     {
         this.x = x;

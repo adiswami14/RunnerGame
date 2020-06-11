@@ -7,13 +7,22 @@ public class Game extends JPanel implements KeyListener {
     JFrame frame;
     World world;
     Character player;
-    Ground ground = new Ground(0, 0, 200, false, Color.GREEN);;
+    Ground ground = new Ground(0, 0, 200, false, Color.GREEN, null);
     int playerX = 30, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
-    int pitInterval = 5; //will change everytime a pitFall shows up
-    int countRight =0; //number of times the right arrow has been clicked
-	boolean first = false;
+    Timer timer  = new Timer(500, new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO Auto-generated method stub
+            ground.keepDrawing();
+            if(!world.gameOver)
+                world.gameScore++;
+            repaint();
+        }
+
+    });
+    boolean first = false;
     public Game() {
         instantiateFrame();
     }
@@ -23,29 +32,12 @@ public class Game extends JPanel implements KeyListener {
         requestFocus(true);
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, frame.getWidth(), frame.getHeight()); // Created Rectangle for frame
-
-      	g.setColor(ground.getColor());
-		int count =0;
-		for(int x=0; x<frame.getWidth(); x++){
-			if(x%100 == 0){ //evenly divides width into 10 rectangles
-				if(ground.getPitPosition().get(count) == false){
-					g.fillRect(x, frameHeight-ground.getHeight(), frameWidth/10, ground.getHeight()); //so this goes from bottom to top instead of top to bottom
-
-					/*
-					if(count%2==0){							//alternates color to see each rectangle
-						ground.setColor(Color.YELLOW);
-						g.setColor(ground.getColor());
-					}
-					else{
-						ground.setColor(Color.GREEN);
-						g.setColor(ground.getColor());
-					}*/
-
-				}
-				count++;
-			}
-		}
+        ground.draw(g);
         player.draw(g, ground);
+        g.setColor(Color.CYAN);
+        g.drawString("Score: "+world.gameScore, 350, 200);
+        if(world.gameOver)
+            timer.stop();
         repaint();
     }
 
@@ -53,12 +45,14 @@ public class Game extends JPanel implements KeyListener {
         frame = new JFrame();
         world = new World(0, 0);
         player = new Character(30, frameHeight - ground.getHeight());
+        ground.setPlayer(player);
         this.addKeyListener(this);
         frame.add(this);
         frame.setSize(frameWidth, frameHeight);
         frame.setVisible(true);
         this.requestFocusInWindow();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        timer.start();
     }
 
     @Override
@@ -70,30 +64,10 @@ public class Game extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
-        if (e.getKeyCode() == 32) // spacebar
+        if (e.getKeyCode() == 32) //spacebar
         {
             player.jump();
             new Thread(new thread()).start();
-        }
-        if (e.getKeyCode() == 39) // right
-        {
-			countRight++;
-			if(countRight%pitInterval == 0 && !ground.getPitPosition().get(ground.getPitPositionSize() - 2)){
-				ground.setPitPosition(ground.getPitPositionSize() - 1, true);
-				pitInterval = (int)(Math.random()*15) + 3;
-			}
-			for(int x=0; x<ground.getPitPositionSize(); x++){
-				if(ground.getPitPosition().get(x)==true){
-					if(x-1>=0){
-						ground.setPitPosition(x-1, true);
-						ground.setPitPosition(x, false);
-					}
-					else if(x-1<0){
-						ground.setPitPosition(x, false);
-					}
-				}
-			}
-            repaint();
         }
     }
 
@@ -108,7 +82,7 @@ public class Game extends JPanel implements KeyListener {
         public void run() {
             // TODO Auto-generated method stub
             try {
-                Thread.sleep(200);
+                Thread.sleep(350);
                 player.isJumping = false;
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
