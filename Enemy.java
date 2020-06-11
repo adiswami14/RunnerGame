@@ -1,6 +1,6 @@
 public class Enemy extends World 
 {
-    public Enemy(int x, int y)
+    public Enemy(double x, double y)
     {
         super(x, y);
     }

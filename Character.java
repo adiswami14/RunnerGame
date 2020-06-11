@@ -6,11 +6,13 @@ import java.awt.*;
 public class Character extends World {
     private int speed = 2; // rate of ground movement beneath character
     public boolean isJumping = false;
-    private int jumpHeight = 2;
+    private double jumpHeight = 2;
+    private double jumpRate = 0.2;
+    public boolean completedJump = true;
     public Character(int x, int y) {
         super(x, y);
     }
-    public int getJumpHeight()
+    public double getJumpHeight()
     {
         return jumpHeight;
     }
@@ -25,7 +27,8 @@ public class Character extends World {
         this.speed = speed;
     }
     public void jump() {
-        isJumping = true;        
+        isJumping = true;  
+        completedJump=false;      
     }
     public boolean isInRange(int source, int target, int range)
     {
@@ -37,14 +40,23 @@ public class Character extends World {
         g.setFont(new Font("Times New Roman", Font.BOLD, 40));
         //g.drawString("Player X: " + getX(), 500, 200);
         //g.drawString("Player Y: " + getY(), 500, 250);
-        g.fillRect(getX(), getY() - 40, 40, 40);
+        g.fillRect((int)getX(), (int)getY() - 40, 40, 40);
         if(getY()<=160)
             isJumping = false;
         if(isJumping)
         {
-            setY(getY()-getJumpHeight());
+            setY(getY()-(getJumpHeight()));
+            //setX(getX()+getJumpHeight()/4);
         }
         else if(!isJumping && getY()<600 - ground.getHeight())
+        {
             setY(getY()+getJumpHeight());
+            //setX(getX()+getJumpHeight()/4);
+        }
+        if(getY()>=600-ground.getHeight())
+        {
+            setY(600-ground.getHeight());
+            completedJump=true;
+        }
     }
 }

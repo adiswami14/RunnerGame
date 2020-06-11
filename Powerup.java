@@ -1,6 +1,6 @@
 public class Powerup extends World
 {
-    public Powerup(int x, int y)
+    public Powerup(double x, double y)
     {
         super(x, y);
     }

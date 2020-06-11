@@ -11,18 +11,19 @@ public class Game extends JPanel implements KeyListener {
     int playerX = 30, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
-    Timer timer  = new Timer(500, new ActionListener(){
+    Timer timer = new Timer(500, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             ground.keepDrawing();
-            if(!world.gameOver)
+            if (!world.gameOver)
                 world.gameScore++;
-            repaint();
+            // repaint();
         }
 
     });
     boolean first = false;
+
     public Game() {
         instantiateFrame();
     }
@@ -35,8 +36,8 @@ public class Game extends JPanel implements KeyListener {
         ground.draw(g);
         player.draw(g, ground);
         g.setColor(Color.CYAN);
-        g.drawString("Score: "+world.gameScore, 350, 200);
-        if(world.gameOver)
+        // g.drawString("Score: "+world.gameScore, 350, 200);
+        if (world.gameOver)
             timer.stop();
         repaint();
     }
@@ -64,10 +65,9 @@ public class Game extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
-        if (e.getKeyCode() == 32) //spacebar
+        if (e.getKeyCode() == 32 && player.completedJump) // spacebar
         {
             player.jump();
-            new Thread(new thread()).start();
         }
     }
 
@@ -75,22 +75,6 @@ public class Game extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
         // TODO Auto-generated method stub
 
-    }
-
-    public class thread implements Runnable {
-        @Override
-        public void run() {
-            // TODO Auto-generated method stub
-            try {
-                Thread.sleep(350);
-                player.isJumping = false;
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                new Thread(this).start();
-                e.printStackTrace();
-                System.exit(0);
-            }
-        }
     }
     public static void main(String[] args)
     {

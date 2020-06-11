@@ -13,11 +13,11 @@ public class Ground extends World
 	private int pitInterval = 5;
 	private Character player;
 	private ArrayList<Boolean> pitPosition;
-	public Ground(int x, int y)
+	public Ground(double x, double y)
 	{
 		super(x,y);
 	}
-    public Ground(int x, int y, int height, boolean pit, Color col, Character player)
+    public Ground(double x, double y, int height, boolean pit, Color col, Character player)
     {
 		super(x, y);
 		this.height = height;
@@ -49,7 +49,7 @@ public class Ground extends World
 						setPitPosition(x, false);
 					}
 				}
-            }
+			}
 	}
 	public void draw(Graphics g)
 	{
@@ -74,9 +74,10 @@ public class Ground extends World
 				}
 				else 
 				{
-					gameOver = true;
-					if(getPitPosition().get(count) == true)
-						System.out.println("game over");
+					//gameOver = true;
+					//if(getPitPosition().get(count) == true)
+						//System.out.println("game over");
+					//player.setY(player.getY()+50);
 				}
 				count++;
 			}
