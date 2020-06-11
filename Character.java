@@ -38,6 +38,8 @@ public class Character extends World {
         //g.drawString("Player X: " + getX(), 500, 200);
         //g.drawString("Player Y: " + getY(), 500, 250);
         g.fillRect(getX(), getY() - 40, 40, 40);
+        if(getY()<=160)
+            isJumping = false;
         if(isJumping)
         {
             setY(getY()-getJumpHeight());

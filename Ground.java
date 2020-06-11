@@ -72,8 +72,12 @@ public class Ground extends World
 					/*if(player.getX() == x && getPitPosition().get(count))
 						gameOver = true;*/
 				}
-				if(getPitPosition().get(count) && player.isInRange(player.getX(), x+50, 50))
+				else 
+				{
 					gameOver = true;
+					if(getPitPosition().get(count) == true)
+						System.out.println("game over");
+				}
 				count++;
 			}
 		}
