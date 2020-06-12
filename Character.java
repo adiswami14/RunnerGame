@@ -6,7 +6,7 @@ import java.awt.*;
 public class Character extends World {
     private int speed = 2; // rate of ground movement beneath character
     public boolean isJumping = false;
-    private double jumpHeight = 2;
+    private double jumpHeight = 5;
     private double jumpRate = 0.2;
     public boolean completedJump = true;
     public Character(int x, int y) {
@@ -30,7 +30,7 @@ public class Character extends World {
         isJumping = true;  
         completedJump=false;      
     }
-    public boolean isInRange(int source, int target, int range)
+    public boolean isInRange(double source, double target, double range)
     {
         return (source >= target-range && source <=target+range);
     }
@@ -41,7 +41,7 @@ public class Character extends World {
         //g.drawString("Player X: " + getX(), 500, 200);
         //g.drawString("Player Y: " + getY(), 500, 250);
         g.fillRect((int)getX(), (int)getY() - 40, 40, 40);
-        if(getY()<=160)
+        if(getY()<=250)
             isJumping = false;
         if(isJumping)
         {

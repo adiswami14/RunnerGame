@@ -12,6 +12,7 @@ public class Ground extends World
 	private int countRight = 0;
 	private int pitInterval = 5;
 	private Character player;
+	public boolean gameOver = false;
 	private ArrayList<Boolean> pitPosition;
 	public Ground(double x, double y)
 	{
@@ -74,11 +75,14 @@ public class Ground extends World
 				}
 				else 
 				{
-					//gameOver = true;
+					gameOver = true;
 					g.setColor(Color.PINK);
 					if(getPitPosition().get(count) == true)
+					{
 						g.fillRect(x, 600-getHeight(), 1000/10, getHeight());
-						//System.out.println("game over");
+						if(player.isInRange(player.getX(), x+50, 50))
+							gameOver = true;
+					}
 					//player.setY(player.getY()+50);
 				}
 				count++;

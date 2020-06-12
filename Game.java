@@ -11,13 +11,13 @@ public class Game extends JPanel implements KeyListener {
     int playerX = 500, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
-    Timer timer = new Timer(200, new ActionListener() {
+    Timer timer = new Timer(180, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             ground.keepDrawing();
-            if (!world.gameOver)
-                world.gameScore++;
+            /*if (!ground.gameOver)
+                world.gameScore++;*/
             // repaint();
         }
 
@@ -37,10 +37,8 @@ public class Game extends JPanel implements KeyListener {
         player.draw(g, ground);
         g.setColor(Color.CYAN);
         g.drawString("Score: "+world.gameScore, 350, 200);
-        if (world.gameOver)
-            timer.stop();
-        if(world.gameScore == 45)
-            world.gameOver = true;
+        /*if (ground.gameOver)
+            timer.stop();*/
         repaint();
     }
 
