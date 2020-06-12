@@ -16,8 +16,8 @@ public class Game extends JPanel implements KeyListener {
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
             ground.keepDrawing();
-            /*if (!ground.gameOver)
-                world.gameScore++;*/
+            if (!ground.gameOver)
+                world.gameScore++;
             // repaint();
         }
 
@@ -37,8 +37,8 @@ public class Game extends JPanel implements KeyListener {
         player.draw(g, ground);
         g.setColor(Color.CYAN);
         g.drawString("Score: "+world.gameScore, 350, 200);
-        /*if (ground.gameOver)
-            timer.stop();*/
+        if (ground.gameOver)
+            timer.stop();
         repaint();
     }
 
