@@ -13,6 +13,7 @@ public class Ground extends World
 	private int pitInterval = 5;
 	private Character player;
 	public boolean gameOver = false;
+	private boolean pitsEnabled= true;
 	private ArrayList<Boolean> pitPosition;
 	public Ground(double x, double y)
 	{
@@ -55,8 +56,8 @@ public class Ground extends World
 	public void draw(Graphics g)
 	{
 		int count = 0;
+		g.setColor(getColor());
 		for(int x=0; x<1000; x++){
-			g.setColor(getColor());
 			if(x%100 == 0){ //evenly divides width into 10 rectangles
 				if(getPitPosition().get(count) == false){
 					g.fillRect(x, 600-getHeight(), 1000/10, getHeight()); //so this goes from bottom to top instead of top to bottom
@@ -75,12 +76,13 @@ public class Ground extends World
 				}
 				else 
 				{
-					g.setColor(Color.PINK);
 					if(getPitPosition().get(count) == true)
 					{
-						g.fillRect(x, 600-getHeight(), 1000/10, getHeight());
-						if(player.isInRange(player.getX(), x+50, 50) && player.getY()>=600-getHeight())
+						if(player.isInRangeOfPit(player.getX(), x+50, 50) && player.getY()>=600-getHeight() && pitsEnabled)
+						{
+							//player.completedJump = false;
 							gameOver = true;
+						}
 					}
 					//player.setY(player.getY()+50);
 				}

@@ -30,9 +30,9 @@ public class Character extends World {
         isJumping = true;  
         completedJump=false;      
     }
-    public boolean isInRange(double source, double target, double range)
+    public boolean isInRangeOfPit(double source, double target, double range)
     {
-        return (source >= target-range && source <=target+range);
+        return (source >= target-range && source <=target+range -40 && completedJump);
     }
     public void draw(Graphics g, Ground ground)
     {
