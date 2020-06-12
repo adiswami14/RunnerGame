@@ -13,8 +13,9 @@ public class Ground extends World
 	private int pitInterval = 5;
 	private Character player;
 	public boolean gameOver = false;
-	private boolean pitsEnabled= true;
+	private boolean pitsEnabled= false;
 	private ArrayList<Boolean> pitPosition;
+
 	public Ground(double x, double y)
 	{
 		super(x,y);
@@ -52,6 +53,12 @@ public class Ground extends World
 					}
 				}
 			}
+
+			/*
+			if(countRight%obstacleInterval == 0){
+				Obstacle obstacle = new Obstacle(900, frameHeight - ground.getHeight());
+			}
+			*/
 	}
 	public void draw(Graphics g)
 	{
@@ -62,19 +69,8 @@ public class Ground extends World
 				if(getPitPosition().get(count) == false){
 					g.fillRect(x, 600-getHeight(), 1000/10, getHeight()); //so this goes from bottom to top instead of top to bottom
 
-					/*
-					if(count%2==0){							//alternates color to see each rectangle
-						ground.setColor(Color.YELLOW);
-						g.setColor(ground.getColor());
-					}
-					else{
-						ground.setColor(Color.GREEN);
-						g.setColor(ground.getColor());
-					}*/
-					/*if(player.getX() == x && getPitPosition().get(count))
-						gameOver = true;*/
 				}
-				else 
+				else
 				{
 					if(getPitPosition().get(count) == true)
 					{
@@ -89,6 +85,8 @@ public class Ground extends World
 				count++;
 			}
 		}
+
+
 	}
     public int getHeight()
     {
