@@ -8,6 +8,7 @@ public class Game extends JPanel implements KeyListener {
     World world;
     Character player;
     Ground ground = new Ground(0, 0, 200, false, Color.GREEN, null);
+    Enemy enemy;
     int playerX = 500, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
@@ -19,6 +20,7 @@ public class Game extends JPanel implements KeyListener {
             if (!ground.gameOver)
                 world.gameScore++;
             // repaint();
+            enemy.moveLeft();
         }
 
     });
@@ -35,6 +37,7 @@ public class Game extends JPanel implements KeyListener {
         g.fillRect(0, 0, frame.getWidth(), frame.getHeight()); // Created Rectangle for frame
         ground.draw(g);
         player.draw(g, ground);
+        enemy.draw(g, ground);
         g.setColor(Color.CYAN);
         g.drawString("Score: "+world.gameScore, 350, 200);
         if (ground.gameOver)
@@ -46,6 +49,7 @@ public class Game extends JPanel implements KeyListener {
         frame = new JFrame();
         world = new World(0, 0);
         player = new Character(playerX, frameHeight - ground.getHeight());
+        enemy = new Enemy(900, frameHeight - ground.getHeight());
         ground.setPlayer(player);
         this.addKeyListener(this);
         frame.add(this);
