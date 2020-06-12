@@ -1,14 +1,16 @@
 import javax.swing.*;
+import javax.swing.event.MouseInputListener;
+
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class Game extends JPanel implements KeyListener {
+public class Game extends JPanel implements KeyListener, MouseInputListener {
     JFrame frame;
     World world;
     Character player;
     Ground ground = new Ground(0, 0, 200, false, Color.GREEN, null);
-    Enemy enemy;
+    Obstacle enemy;
     int playerX = 500, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
@@ -20,7 +22,7 @@ public class Game extends JPanel implements KeyListener {
             if (!ground.gameOver)
                 world.gameScore++;
             // repaint();
-            enemy.moveLeft();
+            //enemy.moveLeft();
         }
 
     });
@@ -38,10 +40,15 @@ public class Game extends JPanel implements KeyListener {
         ground.draw(g);
         player.draw(g, ground);
         enemy.draw(g, ground);
+        g.setFont(new Font("Times New Roman", Font.BOLD, 40));
         g.setColor(Color.CYAN);
-        g.drawString("Score: "+world.gameScore, 350, 200);
+        g.drawString("Score: "+world.gameScore, 425, 50);
+        g.setColor(Color.WHITE);
         if (ground.gameOver)
+        {
             timer.stop();
+            g.drawString("Restart", 425, (int)player.getY()-200);
+        }
         repaint();
     }
 
@@ -49,9 +56,10 @@ public class Game extends JPanel implements KeyListener {
         frame = new JFrame();
         world = new World(0, 0);
         player = new Character(playerX, frameHeight - ground.getHeight());
-        enemy = new Enemy(900, frameHeight - ground.getHeight());
+        enemy = new Obstacle(900, frameHeight - ground.getHeight());
         ground.setPlayer(player);
         this.addKeyListener(this);
+        this.addMouseListener(this);
         frame.add(this);
         frame.setSize(frameWidth, frameHeight);
         frame.setVisible(true);
@@ -59,7 +67,10 @@ public class Game extends JPanel implements KeyListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         timer.start();
     }
-
+    public void restart()
+    {
+        
+    }
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO Auto-generated method stub
@@ -77,6 +88,55 @@ public class Game extends JPanel implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
+        int mouseX = e.getX();
+        int mouseY = e.getY();
+        if(mouseX>=400 && mouseX<=550)
+        {
+            if(mouseY >= 150 && mouseY<=250)
+            {
+                restart();
+            }
+        }
+
+    }
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
         // TODO Auto-generated method stub
 
     }
