@@ -9,9 +9,12 @@ public class Character extends World {
     private double jumpHeight = 3;
     private double jumpRate = 0.2;
     public boolean completedJump = true;
-    public Character(int x, int y) {
+    private int health = 100;
+    public Character(double x, double y) {
         super(x, y);
     }
+    public int getHealth(){return health;}
+    public void setHealth(int health){this.health = health;}
     public double getJumpHeight()
     {
         return jumpHeight;
@@ -41,6 +44,10 @@ public class Character extends World {
         //g.drawString("Player X: " + getX(), 500, 200);
         //g.drawString("Player Y: " + getY(), 500, 250);
         g.fillRect((int)getX(), (int)getY() - 40, 40, 40);
+        g.setColor(new Color(255 - 255*(getHealth()/100), 255*(getHealth()/100), 0));
+        g.fillRect((int)getX(), (int)getY()-65, 40, 15);
+        g.setColor(Color.GRAY);
+        g.drawRect((int)getX(), (int)getY()-65, 40, 15);
         if(getY()<=200)
             isJumping = false;
         if(isJumping)
