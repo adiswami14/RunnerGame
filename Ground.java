@@ -54,9 +54,9 @@ public class Ground extends World
 	}
 	public void draw(Graphics g)
 	{
-		g.setColor(getColor());
 		int count = 0;
 		for(int x=0; x<1000; x++){
+			g.setColor(getColor());
 			if(x%100 == 0){ //evenly divides width into 10 rectangles
 				if(getPitPosition().get(count) == false){
 					g.fillRect(x, 600-getHeight(), 1000/10, getHeight()); //so this goes from bottom to top instead of top to bottom
@@ -75,7 +75,6 @@ public class Ground extends World
 				}
 				else 
 				{
-					gameOver = true;
 					g.setColor(Color.PINK);
 					if(getPitPosition().get(count) == true)
 					{

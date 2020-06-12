@@ -53,7 +53,7 @@ public class Character extends World {
             setY(getY()+getJumpHeight());
             //setX(getX()+getJumpHeight()/4);
         }
-        if(getY()>=600-ground.getHeight())
+        if(getY()>=600-ground.getHeight() && !completedJump)
         {
             setY(600-ground.getHeight());
             completedJump=true;
