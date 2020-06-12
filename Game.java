@@ -36,9 +36,11 @@ public class Game extends JPanel implements KeyListener {
         ground.draw(g);
         player.draw(g, ground);
         g.setColor(Color.CYAN);
-        // g.drawString("Score: "+world.gameScore, 350, 200);
+        g.drawString("Score: "+world.gameScore, 350, 200);
         if (world.gameOver)
             timer.stop();
+        if(world.gameScore == 45)
+            world.gameOver = true;
         repaint();
     }
 
