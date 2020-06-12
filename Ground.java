@@ -75,7 +75,9 @@ public class Ground extends World
 				else 
 				{
 					//gameOver = true;
-					//if(getPitPosition().get(count) == true)
+					g.setColor(Color.PINK);
+					if(getPitPosition().get(count) == true)
+						g.fillRect(x, 600-getHeight(), 1000/10, getHeight());
 						//System.out.println("game over");
 					//player.setY(player.getY()+50);
 				}
