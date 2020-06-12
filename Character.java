@@ -6,7 +6,7 @@ import java.awt.*;
 public class Character extends World {
     private int speed = 2; // rate of ground movement beneath character
     public boolean isJumping = false;
-    private double jumpHeight = 5;
+    private double jumpHeight = 3;
     private double jumpRate = 0.2;
     public boolean completedJump = true;
     public Character(int x, int y) {
@@ -41,7 +41,7 @@ public class Character extends World {
         //g.drawString("Player X: " + getX(), 500, 200);
         //g.drawString("Player Y: " + getY(), 500, 250);
         g.fillRect((int)getX(), (int)getY() - 40, 40, 40);
-        if(getY()<=250)
+        if(getY()<=200)
             isJumping = false;
         if(isJumping)
         {

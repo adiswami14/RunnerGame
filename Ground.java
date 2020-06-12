@@ -79,7 +79,7 @@ public class Ground extends World
 					if(getPitPosition().get(count) == true)
 					{
 						g.fillRect(x, 600-getHeight(), 1000/10, getHeight());
-						if(player.isInRange(player.getX(), x+50, 50))
+						if(player.isInRange(player.getX(), x+50, 50) && player.getY()>=600-getHeight())
 							gameOver = true;
 					}
 					//player.setY(player.getY()+50);
