@@ -8,10 +8,10 @@ public class Game extends JPanel implements KeyListener {
     World world;
     Character player;
     Ground ground = new Ground(0, 0, 200, false, Color.GREEN, null);
-    int playerX = 30, playerY = 0;
+    int playerX = 500, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
-    Timer timer = new Timer(500, new ActionListener() {
+    Timer timer = new Timer(200, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
@@ -45,7 +45,7 @@ public class Game extends JPanel implements KeyListener {
     public void instantiateFrame() {
         frame = new JFrame();
         world = new World(0, 0);
-        player = new Character(30, frameHeight - ground.getHeight());
+        player = new Character(playerX, frameHeight - ground.getHeight());
         ground.setPlayer(player);
         this.addKeyListener(this);
         frame.add(this);
