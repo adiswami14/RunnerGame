@@ -6,7 +6,6 @@ public class Ground extends World
 {
 	//add key listener later
 	private int height;
-	private boolean pit;
 	private Color col;
 	private int groundColumns = 10;
 	private int countRight = 0;
@@ -14,23 +13,22 @@ public class Ground extends World
 	private Character player;
 	public boolean gameOver = false;
 	private boolean pitsEnabled= true;
-	private ArrayList<Boolean> pitPosition;
-	private ArrayList<Obstacle> obstacles;
+	private ArrayList<Block> blocks;
 	public Ground(double x, double y)
 	{
 		super(x,y);
 	}
-    public Ground(double x, double y, int height, boolean pit, Color col, Character player)
+    public Ground(double x, double y, int height, Color col, Character player)
     {
 		super(x, y);
 		this.height = height;
-		this.pit = pit;
 		this.col = col;
 		this.player = player;
-		pitPosition = new ArrayList<Boolean>();
-		obstacles = new ArrayList<>();
+		blocks = new ArrayList<>();
 		for(int z=0; z<groundColumns; z++)
-			pitPosition.add(false);
+		{
+			blocks.add(new Block(z*100, y,false, false));
+		}
 	}
 	public void setPlayer(Character player)
 	{
@@ -39,78 +37,67 @@ public class Ground extends World
 	public void keepDrawing()
 	{
 			countRight++;
-			if(countRight%pitInterval == 0 && !getPitPosition().get(getPitPositionSize() - 2)){
-				setPitPosition(getPitPositionSize() - 1, true);
+			if(countRight % pitInterval == 0 && !blocks.get(blocks.size()-2).isPit())
+			{
+				blocks.get(blocks.size()-1).setPit(true);
 				pitInterval = (int)(Math.random()*15) + 3;
 			}
-			for(int x=0; x<getPitPositionSize(); x++){
-				if(getPitPosition().get(x)==true){
+			for(int x=0; x<blocks.size(); x++){
+				if(blocks.get(x).isPit()){
 					if(x-1>=0){
-						setPitPosition(x-1, true);
-						setPitPosition(x, false);
+						blocks.get(x-1).setPit(true);
+						blocks.get(x).setPit(false);
 					}
 					else if(x-1<0){
-						setPitPosition(x, false);
+						blocks.get(x).setPit(false);
+					}
+				}
+			}
+			if(countRight%Obstacle.obstacleInterval == 0){
+				for(int x =0;x<blocks.size();x++)
+				{
+					if(!blocks.get(x).isPit())
+					{
+						blocks.get(x).setObstacle(true);
+						break;
 					}
 				}
 			}
 
-			
-			if(countRight%Obstacle.obstacleInterval == 0){
-				obstacles.add(new Obstacle(900, 600 - getHeight()));
-			}
-			
 	}
 	public void draw(Graphics g)
 	{
-		int count = 0;
 		g.setColor(getColor());
-		for(int x=0; x<1000; x++){
-			if(x%100 == 0){ //evenly divides width into 10 rectangles
-				if(getPitPosition().get(count) == false){
-					g.fillRect(x, 600-getHeight(), 1000/10, getHeight()); //so this goes from bottom to top instead of top to bottom
-
-				}
-				else
+		for(int x=0;x<1000;x++)
+		{
+			if(x%100 ==0)
+			{
+				if(!blocks.get(x/100).isPit())
 				{
-					if(getPitPosition().get(count))
+					blocks.get(x/100).draw(g, this);
+				}
+				else if(blocks.get(x/100).isPit())
+				{
+					if(player.isInRangeOfPit(player.getX(), x+50, 50) && player.getY()>=600-getHeight() && pitsEnabled)
 					{
-						if(player.isInRangeOfPit(player.getX(), x+50, 50) && player.getY()>=600-getHeight() && pitsEnabled)
-						{
-							gameOver = true;
-						}
+						gameOver = true;
 					}
 				}
-				count++;
 			}
 		}
-		for(Obstacle obstacle: obstacles)
-			obstacle.draw(g);
 	}
     public int getHeight()
     {
 		return height;
 	}
-	public boolean getPit(){
-		return pit;
-	}
 	public Color getColor(){
 		return col;
-	}
-	public ArrayList<Boolean> getPitPosition(){
-		return pitPosition;
-	}
-	public int getPitPositionSize(){
-		return pitPosition.size();
 	}
 	public void setHeight(int height){
 		this.height = height;
 	}
 	public void setColor(Color col){
 		this.col = col;
-	}
-	public void setPitPosition(int a, boolean bool){
-		pitPosition.set(a, bool);
 	}
 
 }

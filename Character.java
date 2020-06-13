@@ -7,8 +7,8 @@ public class Character extends World {
     private int speed = 2; // rate of ground movement beneath character
     public boolean isJumping = false;
     private double jumpHeight = 3;
-    private double jumpRate = 0.2;
     public boolean completedJump = true;
+    public boolean isFalling = false;
     private int health = 100;
     public Character(double x, double y) {
         super(x, y);
@@ -33,6 +33,10 @@ public class Character extends World {
         isJumping = true;  
         completedJump=false;      
     }
+    public void fall()
+    {
+        isFalling = true;
+    }
     public boolean isInRangeOfPit(double source, double target, double range)
     {
         return (source >= target-range && source <=target+range -40 && completedJump);
@@ -41,8 +45,6 @@ public class Character extends World {
     {
         g.setColor(Color.RED);
         g.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        //g.drawString("Player X: " + getX(), 500, 200);
-        //g.drawString("Player Y: " + getY(), 500, 250);
         g.fillRect((int)getX(), (int)getY() - 40, 40, 40);
         g.setColor(new Color(255 - 255*(getHealth()/100), 255*(getHealth()/100), 0));
         g.fillRect((int)getX(), (int)getY()-65, 40, 15);
@@ -53,12 +55,18 @@ public class Character extends World {
         if(isJumping)
         {
             setY(getY()-(getJumpHeight()));
-            //setX(getX()+getJumpHeight()/4);
         }
         else if(!isJumping && getY()<600 - ground.getHeight())
         {
             setY(getY()+getJumpHeight());
-            //setX(getX()+getJumpHeight()/4);
+        }
+        if(isFalling)
+        {
+            setY(getY()+getJumpHeight());
+        }
+        if(ground.gameOver)
+        {
+            fall();
         }
         if(getY()>=600-ground.getHeight() && !completedJump)
         {

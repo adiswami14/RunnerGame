@@ -9,20 +9,16 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
     JFrame frame;
     World world;
     Character player;
-    Ground ground = new Ground(0, 0, 200, false, Color.GREEN, null);
-    Obstacle enemy;
+    Ground ground = new Ground(0, 0, 200, Color.GREEN, null);
     int playerX = 500, playerY = 0;
     int frameHeight = 600;
     int frameWidth = 1000;
     Timer timer = new Timer(180, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
             ground.keepDrawing();
             if (!ground.gameOver)
                 world.gameScore++;
-            // repaint();
-            //enemy.moveLeft();
         }
 
     });
@@ -56,7 +52,6 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
         frame = new JFrame();
         world = new World(0, 0);
         player = new Character(playerX, frameHeight - ground.getHeight());
-        //enemy = new Obstacle(900, frameHeight - ground.getHeight());
         ground.setPlayer(player);
         this.addKeyListener(this);
         this.addMouseListener(this);
@@ -69,10 +64,9 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
     }
     public void restart()
     {
-		ground = new Ground(0, 0, 200, false, Color.GREEN, null);
+		ground = new Ground(0, 0, 200, Color.GREEN, null);
 		world = new World(0, 0);
-		player = new Character(playerX, frameHeight - ground.getHeight());
-		//enemy = new Obstacle(900, frameHeight - ground.getHeight());
+        player = new Character(playerX, frameHeight - ground.getHeight());
         ground.setPlayer(player);
         timer.start();
 		ground.gameOver=false;
@@ -86,10 +80,12 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
     @Override
     public void keyPressed(KeyEvent e) {
         // TODO Auto-generated method stub
-        if (e.getKeyCode() == 32 && player.completedJump) // spacebar
+        if (e.getKeyCode() == 32 && player.completedJump && !player.isFalling) // spacebar
         {
             player.jump();
         }
+        else if(e.getKeyCode() == 32 && ground.gameOver)
+            restart();
         if(e.getKeyCode() == 10){
 			restart();
 		}
@@ -129,7 +125,6 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
