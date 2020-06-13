@@ -39,7 +39,7 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
         g.fillRect(0, 0, frame.getWidth(), frame.getHeight()); // Created Rectangle for frame
         ground.draw(g);
         player.draw(g, ground);
-        enemy.draw(g, ground);
+        //enemy.draw(g, ground);
         g.setFont(new Font("Times New Roman", Font.BOLD, 40));
         g.setColor(Color.CYAN);
         g.drawString("Score: "+world.gameScore, 425, 50);
@@ -56,7 +56,7 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
         frame = new JFrame();
         world = new World(0, 0);
         player = new Character(playerX, frameHeight - ground.getHeight());
-        enemy = new Obstacle(900, frameHeight - ground.getHeight());
+        //enemy = new Obstacle(900, frameHeight - ground.getHeight());
         ground.setPlayer(player);
         this.addKeyListener(this);
         this.addMouseListener(this);
@@ -72,7 +72,7 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
 		ground = new Ground(0, 0, 200, false, Color.GREEN, null);
 		world = new World(0, 0);
 		player = new Character(playerX, frameHeight - ground.getHeight());
-		enemy = new Obstacle(900, frameHeight - ground.getHeight());
+		//enemy = new Obstacle(900, frameHeight - ground.getHeight());
         ground.setPlayer(player);
         timer.start();
 		ground.gameOver=false;
