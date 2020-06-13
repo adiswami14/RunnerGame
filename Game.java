@@ -16,9 +16,11 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
     Timer timer = new Timer(180, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ground.keepDrawing();
             if (!ground.gameOver)
+            {
+                ground.keepDrawing();
                 world.gameScore++;
+            }
         }
 
     });

@@ -11,8 +11,9 @@ public class Block extends World{
     }
     public void draw(Graphics g, Ground ground)
     {
-        g.fillRect((int)getX(), 600-ground.getHeight(), 1000/10, ground.getHeight());
-        new Obstacle(960-getX(), getY(), isPit, hasObstacle).draw(g);
+        g.fillRect((int)getX(), (int)getY(), 1000/10, ground.getHeight());
+        if(hasObstacle())
+            new Obstacle(getX(), getY(), isPit, hasObstacle).draw(g, ground);
     }
     public boolean hasObstacle(){return hasObstacle;}
     public boolean isPit(){return isPit;}

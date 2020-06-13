@@ -10,13 +10,14 @@ public class Obstacle extends Block
     {
 		super(x, y, isPit, hasObstacle);
     }
-    public void draw(Graphics g)
+    public void draw(Graphics g, Ground ground)
     {
-		if(hasObstacle())
-		{
-			g.fillRect((int)getX(), (int)getY() - 40, 40, 40);
-			//System.out.println("true");
-		}
+		int[] xpoints = {(int)getX(),(int) getX()+50, (int)getX()+100};
+		int[] ypoints = {(int)getY(), (int)getY()-40, (int)getY()};
+		g.fillPolygon(xpoints, ypoints, 3);
+		g.setColor(Color.RED);
+		g.drawPolygon(xpoints, ypoints, 3);
+		g.setColor(ground.getColor());
 	}
 	public void intersect(Character player){
 	}

@@ -27,7 +27,7 @@ public class Ground extends World
 		blocks = new ArrayList<>();
 		for(int z=0; z<groundColumns; z++)
 		{
-			blocks.add(new Block(z*100, y,false, false));
+			blocks.add(new Block(z*100, 600-height,false, false));
 		}
 	}
 	public void setPlayer(Character player)
@@ -53,13 +53,14 @@ public class Ground extends World
 					}
 				}
 			}
-			if(countRight%Obstacle.obstacleInterval == 0){
-				for(int x =0;x<blocks.size();x++)
-				{
-					if(!blocks.get(x).isPit())
-					{
-						blocks.get(x).setObstacle(true);
-						break;
+			for(int x=0; x<blocks.size(); x++){
+				if(blocks.get(x).isPit()){
+					if(x-1>=0){
+						blocks.get(x-1).setObstacle(true);
+						blocks.get(x).setObstacle(false);
+					}
+					else if(x-1<0){
+						blocks.get(x).setObstacle(false);
 					}
 				}
 			}
