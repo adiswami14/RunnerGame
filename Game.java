@@ -47,7 +47,7 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
         if (ground.gameOver)
         {
             timer.stop();
-            g.drawString("Restart", 425, (int)player.getY()-200);
+            g.drawString("Restart", 425, 200);
         }
         repaint();
     }

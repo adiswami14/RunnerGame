@@ -53,9 +53,12 @@ public class Obstacle extends Ground
 	}
 	public void move()
 	{
-		setX(getX()-0.5);
-		if(seePit())
-			jump();
+		if(!gameOver)
+		{
+			setX(getX()-0.5);
+			if(seePit())
+				jump();
+		}
 	}
 	public void jump()
 	{
@@ -64,7 +67,7 @@ public class Obstacle extends Ground
 	}
 	public boolean seePit()
 	{
-		return true;
+		return false;
 	}
 
 }

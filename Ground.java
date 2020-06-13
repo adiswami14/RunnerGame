@@ -13,7 +13,7 @@ public class Ground extends World
 	private int pitInterval = 5;
 	private Character player;
 	public boolean gameOver = false;
-	private boolean pitsEnabled= false;
+	private boolean pitsEnabled= true;
 	private ArrayList<Boolean> pitPosition;
 	private ArrayList<Obstacle> obstacles;
 	public Ground(double x, double y)
