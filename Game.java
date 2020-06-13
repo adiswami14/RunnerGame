@@ -69,7 +69,13 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
     }
     public void restart()
     {
-        
+		ground = new Ground(0, 0, 200, false, Color.GREEN, null);
+		world = new World(0, 0);
+		player = new Character(playerX, frameHeight - ground.getHeight());
+		enemy = new Obstacle(900, frameHeight - ground.getHeight());
+        ground.setPlayer(player);
+        timer.start();
+		ground.gameOver=false;
     }
     @Override
     public void keyTyped(KeyEvent e) {
@@ -84,6 +90,9 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
         {
             player.jump();
         }
+        if(e.getKeyCode() == 10){
+			restart();
+		}
     }
 
     @Override
