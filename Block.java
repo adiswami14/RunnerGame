@@ -13,7 +13,11 @@ public class Block extends World{
     {
         g.fillRect((int)getX(), (int)getY(), 1000/10, ground.getHeight());
         if(hasObstacle())
-            new Obstacle(getX(), getY(), isPit, hasObstacle).draw(g, ground);
+        {
+            Obstacle obstacle = new Obstacle(getX(), getY(), isPit, hasObstacle);
+            obstacle.draw(g, ground);
+            obstacle.intersect(ground.getPlayer());
+        }
     }
     public boolean hasObstacle(){return hasObstacle;}
     public boolean isPit(){return isPit;}

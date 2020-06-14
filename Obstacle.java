@@ -20,6 +20,10 @@ public class Obstacle extends Block
 		g.setColor(ground.getColor());
 	}
 	public void intersect(Character player){
+		if(player.getX() == getX() && player.getY() == getY())
+		{
+			player.setHealth(player.getHealth()-10);
+		}
 	}
 	public int getObstacleInterval(){
 		return obstacleInterval;

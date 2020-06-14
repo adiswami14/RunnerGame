@@ -34,6 +34,10 @@ public class Ground extends World
 	{
 		this.player = player;
 	}
+	public Character getPlayer()
+	{
+		return player;
+	}
 	public void keepDrawing()
 	{
 			countRight++;
@@ -86,6 +90,8 @@ public class Ground extends World
 				}
 			}
 		}
+		if(player.getHealth()<=0)
+			gameOver = true;
 	}
     public int getHeight()
     {
