@@ -14,6 +14,8 @@ public class Ground extends World
 	public boolean gameOver = false;
 	private boolean pitsEnabled= false;
 	private ArrayList<Block> blocks;
+	private boolean isVisible = true;
+	private ArrayList<Boolean> obstacleVisibles;
 	public Ground(double x, double y)
 	{
 		super(x,y);
@@ -25,9 +27,11 @@ public class Ground extends World
 		this.col = col;
 		this.player = player;
 		blocks = new ArrayList<>();
+		obstacleVisibles = new ArrayList<>();
 		for(int z=0; z<groundColumns; z++)
 		{
 			blocks.add(new Block(z*100, 600-height,false, false));		//ground is split into 10 columns, so z*100 gives the x coordinate bc frame is 1000 pixels wide
+			obstacleVisibles.add(false);
 		}
 	}
 	public void setPlayer(Character player)
@@ -62,6 +66,7 @@ public class Ground extends World
 			!blocks.get(blocks.size()-2).hasObstacle() ){
 				
 				blocks.get(blocks.size()-1).setObstacle(true);
+				obstacleVisibles.set(blocks.size()-1, true);
 				Obstacle.obstacleInterval = (int)(Math.random()*15) + 3;
 			}
 
@@ -69,10 +74,13 @@ public class Ground extends World
 				if(blocks.get(x).hasObstacle()){
 					if(x-1>=0){
 						blocks.get(x-1).setObstacle(true);
+						obstacleVisibles.set(x-1, true);
 						blocks.get(x).setObstacle(false);
+						obstacleVisibles.set(x, false);
 					}
 					else if(x-1<0){
 						blocks.get(x).setObstacle(false);
+						obstacleVisibles.set(x, false);
 					}
 				}
 			}
@@ -92,6 +100,14 @@ public class Ground extends World
 					{
 						Obstacle obstacle = new Obstacle(blocks.get(x/100).getX(), blocks.get(x/100).getY(), blocks.get(x/100).isPit(), blocks.get(x/100).hasObstacle());
 						obstacle.draw(g, this);
+						if(obstacleVisibles.get(x/100))
+						{
+							if(obstacle.intersect(player))
+							{
+								player.setHealth(player.getHealth()-10);
+								obstacleVisibles.set(x/100, false);
+							}
+						}
 					}
 				}
 				else if(blocks.get(x/100).isPit())
