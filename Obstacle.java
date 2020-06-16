@@ -18,7 +18,7 @@ public class Obstacle extends Block
 		g.setColor(Color.BLACK);
 		g.drawPolygon(xpoints, ypoints, 3);
 		g.setColor(ground.getColor());
-		intersect(ground.getPlayer());
+		//intersect(ground.getPlayer());
 	}
 	public boolean intersect(Character player){
 		return (player.getX() == getX() && player.getY() == getY());

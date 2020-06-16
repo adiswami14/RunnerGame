@@ -9,6 +9,7 @@ public class Character extends World {
     private double jumpHeight = 2;
     public boolean completedJump = true;
     public boolean isFalling = false;
+    private boolean invincible = false;
     private int health = 100;
     public Character(double x, double y) {
         super(x, y);
@@ -77,4 +78,12 @@ public class Character extends World {
             completedJump=true;
         }
     }
+
+    public boolean isInvicible(){
+        return invincible;
+    }
+    public void setInvincible(boolean invincible){
+        this.invincible = invincible;
+    }
+
 }

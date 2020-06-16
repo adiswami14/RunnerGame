@@ -9,7 +9,6 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
     JFrame frame;
     World world;
     Character player;
-    Powerup starPower;
     Ground ground = new Ground(0, 0, 200, Color.GREEN, null);
     int playerX = 500, playerY = 0;
     int frameHeight = 600;
@@ -38,7 +37,7 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
         g.fillRect(0, 0, frame.getWidth(), frame.getHeight()); // Created Rectangle for frame
         ground.draw(g);
         player.draw(g, ground);
-        starPower.draw(g,ground);
+        
         //enemy.draw(g, ground);
         g.setFont(new Font("Times New Roman", Font.BOLD, 40));
         g.setColor(Color.BLACK);
@@ -56,7 +55,6 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
         frame = new JFrame();
         world = new World(0, 0);
         player = new Character(playerX, frameHeight - ground.getHeight());
-        starPower = new Powerup(900, 300, false, false);		//testing drawing powerup
         ground.setPlayer(player);
         this.addKeyListener(this);
         this.addMouseListener(this);

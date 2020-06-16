@@ -9,13 +9,16 @@ public class Ground extends World
 	private Color col;
 	private int groundColumns = 10;
 	private int countRight = 0;
+	private int starCount = 0;
 	private int pitInterval = 5;
 	private Character player;
 	public boolean gameOver = false;
 	private boolean pitsEnabled= false;
+	private boolean starEnabled = true;
 	private ArrayList<Block> blocks;
 	private boolean isVisible = true;
 	private ArrayList<Boolean> obstacleVisibles;
+	
 	public Ground(double x, double y)
 	{
 		super(x,y);
@@ -44,7 +47,11 @@ public class Ground extends World
 	}
 	public void keepDrawing()
 	{
+			System.out.println("POWERUP TEST"+player.isInvicible());
 			countRight++;
+			if(player.isInvicible() == true){  //counts amount of time player has the star powerup
+				starCount++;
+			}
 			if(countRight % pitInterval == 0 && !blocks.get(blocks.size()-2).isPit())	//can't have 2 pits together so if the 2nd to last block is not a pit									
 			{																			//then set the last block to a pit
 				blocks.get(blocks.size()-1).setPit(true);
@@ -84,6 +91,33 @@ public class Ground extends World
 					}
 				}
 			}
+			
+			//powerup code
+			if(!blocks.get(blocks.size()-1).isPit() && !blocks.get(blocks.size()-1).hasObstacle() 
+			&& countRight%Powerup.starInterval ==0 && player.isInvicible() == false){
+				blocks.get(blocks.size()-1).setStar(true);
+				Powerup.starInterval = (int)(Math.random()*50) + 30;		//change interval later
+				System.out.println("STAR INTERVALL"+Powerup.starInterval);
+			}
+			else if(starCount%Powerup.starTime == 0){  //may have done this wrong so change later
+				player.setInvincible(false);
+				starCount =0;
+			}
+			for(int x=0; x<blocks.size(); x++){
+				if(blocks.get(x).hasStar()){
+					if(x-1>=0){
+						blocks.get(x-1).setStar(true);
+						//obstacleVisibles.set(x-1, true);
+						blocks.get(x).setStar(false);
+						//obstacleVisibles.set(x, false);
+					}
+					else if(x-1<0){
+						blocks.get(x).setStar(false);
+						//obstacleVisibles.set(x, false);
+					}
+				}
+			}
+				
 
 	}
 	public void draw(Graphics g)
@@ -100,23 +134,34 @@ public class Ground extends World
 					{
 						Obstacle obstacle = new Obstacle(blocks.get(x/100).getX(), blocks.get(x/100).getY(), blocks.get(x/100).isPit(), blocks.get(x/100).hasObstacle());
 						obstacle.draw(g, this);
+
 						if(obstacleVisibles.get(x/100))
 						{
-							if(obstacle.intersect(player))
+							if(obstacle.intersect(player) && player.isInvicible() == false)
 							{
 								player.setHealth(player.getHealth()-10);
 								obstacleVisibles.set(x/100, false);
 							}
 						}
+						
 					}
+					if(blocks.get(x/100).hasStar()){
+						//At the moment hardcoded location of powerups - need to randomize
+						Powerup star = new Powerup(blocks.get(x/100).getX(), blocks.get(x/100).getY()-100, blocks.get(x/100).isPit(), blocks.get(x/100).hasObstacle());
+						star.draw(g, this);
+						if(star.intersect(player) && starEnabled){			//for powerup may delete later
+							player.setInvincible(true);
+							System.out.println("POWERUP TEST"+player.isInvicible());
+						}
+					}	
 				}
 				else if(blocks.get(x/100).isPit())
 				{
-					if(player.isInRangeOfPit(player.getX(), x+50, 50) && player.getY()>=600-getHeight() && pitsEnabled)
+					if(player.isInRangeOfPit(player.getX(), x+50, 50) && player.getY()>=600-getHeight() && pitsEnabled && player.isInvicible() == false)
 					{
 						gameOver = true;
 					}
-				}
+				}	
 			}
 		}
 		if(player.getHealth()<=0)
