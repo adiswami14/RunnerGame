@@ -59,7 +59,7 @@ public class Ground extends World
 			}
 
 			for(int x=0; x<blocks.size(); x++){
-				if(blocks.get(x).isPit()){
+				/*if(blocks.get(x).isPit()){
 					if(x-1>=0){
 						blocks.get(x-1).setObstacle(true);
 						blocks.get(x).setObstacle(false);
@@ -67,6 +67,16 @@ public class Ground extends World
 					else if(x-1<0){
 						blocks.get(x).setObstacle(false);
 					}
+				}*/
+				if(!blocks.get(x).isPit() && (x % Obstacle.obstacleInterval ==0))
+				{
+					if(x-1>=0){
+						blocks.get(x-1).setObstacle(true);
+						blocks.get(x).setObstacle(false);
+					}
+				}
+				else{
+					blocks.get(x).setObstacle(false);
 				}
 			}
 

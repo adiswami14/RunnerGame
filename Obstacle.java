@@ -16,7 +16,7 @@ public class Obstacle extends Block
 		int[] ypoints = {(int)getY(), (int)getY()-40, (int)getY()};
 
 		g.fillPolygon(xpoints, ypoints, 3);			//draws triangle for the obstacle
-		g.setColor(Color.RED);
+		g.setColor(Color.BLACK);
 		g.drawPolygon(xpoints, ypoints, 3);
 		g.setColor(ground.getColor());
 	}
