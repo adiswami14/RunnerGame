@@ -33,13 +33,13 @@ public class Game extends JPanel implements KeyListener, MouseInputListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         requestFocus(true);
-        g.setColor(Color.BLACK);
+        g.setColor(Color.CYAN);
         g.fillRect(0, 0, frame.getWidth(), frame.getHeight()); // Created Rectangle for frame
         ground.draw(g);
         player.draw(g, ground);
         //enemy.draw(g, ground);
         g.setFont(new Font("Times New Roman", Font.BOLD, 40));
-        g.setColor(Color.CYAN);
+        g.setColor(Color.BLACK);
         g.drawString("Score: "+world.gameScore, 425, 50);
         g.setColor(Color.WHITE);
         if (ground.gameOver)
