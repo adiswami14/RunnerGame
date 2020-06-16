@@ -27,7 +27,7 @@ public class Ground extends World
 		blocks = new ArrayList<>();
 		for(int z=0; z<groundColumns; z++)
 		{
-			blocks.add(new Block(z*100, 600-height,false, false));
+			blocks.add(new Block(z*100, 600-height,false, false));		//ground is split into 10 columns, so z*100 gives the x coordinate bc frame is 1000 pixels wide
 		}
 	}
 	public void setPlayer(Character player)
@@ -57,6 +57,7 @@ public class Ground extends World
 					}
 				}
 			}
+
 			for(int x=0; x<blocks.size(); x++){
 				if(blocks.get(x).isPit()){
 					if(x-1>=0){

@@ -1,6 +1,6 @@
 import java.awt.Color;
 import java.awt.*;
-public class Block extends World{
+public class Block extends World{			//rectangles that make up the ground (may have a pit or obstacle)
 
     private boolean isPit;
     private boolean hasObstacle;
@@ -16,12 +16,12 @@ public class Block extends World{
         {
             Obstacle obstacle = new Obstacle(getX(), getY(), isPit, hasObstacle);
             obstacle.draw(g, ground);
-            obstacle.intersect(ground.getPlayer());
+            obstacle.intersect(ground.getPlayer());			//player hits object
         }
     }
     public boolean hasObstacle(){return hasObstacle;}
     public boolean isPit(){return isPit;}
     public void setObstacle(boolean hasObstacle){this.hasObstacle=hasObstacle;}
     public void setPit(boolean isPit){this.isPit = isPit;}
-    
+
 }
