@@ -12,7 +12,7 @@ public class Ground extends World
 	private int pitInterval = 5;
 	private Character player;
 	public boolean gameOver = false;
-	private boolean pitsEnabled= true;
+	private boolean pitsEnabled= false;
 	private ArrayList<Block> blocks;
 	public Ground(double x, double y)
 	{
@@ -88,6 +88,11 @@ public class Ground extends World
 				if(!blocks.get(x/100).isPit())
 				{
 					blocks.get(x/100).draw(g, this);
+					if(blocks.get(x/100).hasObstacle())
+					{
+						Obstacle obstacle = new Obstacle(blocks.get(x/100).getX(), blocks.get(x/100).getY(), blocks.get(x/100).isPit(), blocks.get(x/100).hasObstacle());
+						obstacle.draw(g, this);
+					}
 				}
 				else if(blocks.get(x/100).isPit())
 				{

@@ -12,12 +12,11 @@ public class Block extends World{			//rectangles that make up the ground (may ha
     public void draw(Graphics g, Ground ground)
     {
         g.fillRect((int)getX(), (int)getY(), 1000/10, ground.getHeight());
-        if(hasObstacle())
+        /*if(hasObstacle())
         {
             Obstacle obstacle = new Obstacle(getX(), getY(), isPit, hasObstacle);
             obstacle.draw(g, ground);
-            obstacle.intersect(ground.getPlayer());			//player hits object
-        }
+        }*/
     }
     public boolean hasObstacle(){return hasObstacle;}
     public boolean isPit(){return isPit;}
